@@ -8,8 +8,8 @@ data <- read.csv("C:/Users/user/Downloads/Mobiles.csv")
 #第一題
 apple <- subset(data,Company=="Apple")
 samesung <-  subset(data,Company=="Samsung")
-mean(apple$PriceUSA)#1028.485
-mean(samesung$PriceUSA)#748.4318
+median(apple$PriceUSA)#999
+median(samesung$PriceUSA)#699
 sd(apple$PriceUSA)#247.8969
 sd(samesung$PriceUSA)#515.3826
 
@@ -31,27 +31,23 @@ install.packages("car")
 library(car)
 
 leveneTest(PriceUSA~factor(Company),data=data)
-#因為p-value為5.218e-14，p-value值小於0.05，因此拒絕虛無假說，不同廠牌中美國售價之變異數不同。
+#因為p-value為5.218e-14，p-value值小於0.05，因此拒絕虛無假說，不同廠牌手機的美國售價之變異數不同。
 #第五題
 run<- aov(Weight~factor(Company),data=data)
 summary(run)
-
-#因為p-value為3.55e-05，p-value值小於0.05，因此拒絕虛無假說，各廠牌中手機重量有顯著差異。。
+#因為p-value為3.55e-05，p-value值小於0.05，因此拒絕虛無假說，各廠牌手機重量有顯著差異。
 
 
 #第六題
 run2<- aov(Weight~factor(Company)+factor(Battery),data=data)
 summary(run2)
-
-
 #因為p-value均為<2e-16，p-value值小於0.05，因此拒絕虛無假說，廠牌及電池容量對手機重量有顯著影響。
 
 #第七題
-
-year2024 <- subset(data,Year=="2024")
+year2024 = subset(data,Year=="2024")
 apple_year_2024 = table(year2024$Company)   
 prop.table(apple_year_2024) 
-#0.12
+#2024年發行手機中，廠牌為APPLE的比例為0.12
 
 #第八題(1)
 names(data)[1] <- "company"
@@ -68,4 +64,4 @@ library(tidyverse)
 data_new <- mutate(data,price.t=price.u*32)
 data_new$price.t[1:10]
 #第八題(3)
-write.table(data_new,file="C:/Users/user/Desktop/B114030015 王奕婷 期中/B114030015.csv",sep=",",row.names=F, na = "NA")
+write.table(data_new,file="C:/Users/user/Desktop/B114030015/B114030015.csv",sep=",",row.names=F, na = "NA")
