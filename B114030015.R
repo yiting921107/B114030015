@@ -1,5 +1,6 @@
 #Github帳號名:yiting921107
 #B114030015
+#王奕婷
 rm(list=ls())
 data <- read.csv("C:/Users/user/Downloads/Mobiles.csv")
 
